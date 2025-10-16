@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "X Wallet Portfolio Badge",
+  "version": "0.1.0",
+  "description": "Display aggregated wallet balances on X profiles when both users have the extension.",
+  "icons": { "128": "public/icon-128.png" },
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["https://*.x.com/*", "/*"],
+  "background": {"service_worker": "src/background.ts"},
+  "action": {"default_popup": "src/popup/index.html"},
+  "options_page": "src/options/index.html",
+  "content_scripts": [
+    {
+      "matches": ["https://*.x.com/*"],
+      "js": ["src/contentScript.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {"resources": ["public/icon-128.png"], "matches": ["https://*.x.com/*"]}
+  ]
+}
